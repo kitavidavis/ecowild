@@ -23,7 +23,7 @@ import { MapContainer, CircleMarker, GeoJSON, LayersControl, TileLayer, Polyline
 import WildBeastLines from './wildbeastLines';
 import WildBeastPoints from './WildBeastPoints';
 import L, { LatLngExpression } from "leaflet"
-import { AdjustmentsAlt, ArrowDownLeft, ArrowUpRight, Clock, Gps, Line as LineIcon, Palette, PaletteOff, Video, VideoOff } from 'tabler-icons-react';
+import { AdjustmentsAlt, ArrowDownLeft, ArrowUpRight, Clock, ClockHour1, Gps, Line as LineIcon, Palette, PaletteOff, Video, VideoOff } from 'tabler-icons-react';
 import NDVIStatistics from './Statistics';
 import Points from './WildBeestPoints';
 import NDVIStatistics2 from './DynamicChart';
@@ -375,13 +375,13 @@ export default function Dashboard() {
 
               <Tabs.Panel value='summary' >
                 <Title>Introduction</Title>
-              <Text mt={5} mb={10} size="sm">
+              <Text mt={5} mb={10} size="sm" inline >
         GPS data on Wildlife movement patterns combined with EO data can be used to establish the link between animal trajectories and other environmental indicators.
         <br />
         In particular,GPS data at an interval of one hour is used to 
-        provide information on animal trajectory, while landsat data is used to calculate NDVI change that occured while the animal was at a particular spot.
+        provide information on animal trajectory, while EO data from <Anchor target="_blank" href='https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1' >MODIS/061/MOD13Q1</Anchor> is used to calculate NDVI change that occured while the animal was at a particular spot.
         <br />
-        Although the current scope of this dashboard covers NDVI analysis only, further improvements are being made on the dashboard
+        Although the current scope of this project covers NDVI analysis only, further improvements are being made on the dashboard
         to compare the GPS dataset with other indices
         <br />
         This in turn will provide rangers and interested researchers with crucial information on different attributes of different
@@ -450,7 +450,7 @@ export default function Dashboard() {
 
             <Paper mt={5} withBorder radius="md" p="xs" style={{height: 220}}>
             <Text mb={5} size="xs" color="dimmed">
-                  NDVI Change(May - September)
+                  NDVI(May - September)
                 </Text>
               <NDVIStatistics />
             </Paper>
@@ -472,20 +472,26 @@ export default function Dashboard() {
               
           </Group>
           
+          <Group noWrap>
           <MediaQuery smallerThan="md" styles={{display: "none"}}>
-          <Group>
             <Switch label="Basemap" checked={basemap} onChange={() => setBasemap(!basemap)} size="md" />
-            <NumberInput min={0} max={10} value={time} step={0.5} precision={2} onChange={(val) => {setTime(val)}} placeholder="Timelapse interval" />
+          </MediaQuery>
+
+          <MediaQuery smallerThan="sm" styles={{display: "none"}}>
+            <NumberInput icon={<ClockHour1 />} min={0} max={10} value={time} step={0.5} precision={2} onChange={(val) => {setTime(val)}} placeholder="Timelapse interval" />
+            </MediaQuery>
             <Button variant='outline' onClick={() => {setPlaying(!playing)}} leftIcon={playing ? <VideoOff /> : <Video />} >{playing ? "Pause Movements" : "Play Movements"}</Button>
-              <Button variant='outline' onClick={() => {
+              
+            <MediaQuery smallerThan="sm" styles={{display: "none"}}>
+            <Button variant='outline' onClick={() => {
                 setPlaying(false);
                 setPos(0);
                 setCoords([]);
                 setLineCoords([]);
 
               }} leftIcon={<AdjustmentsAlt />} >Reset Player</Button>
+            </MediaQuery>
           </Group>
-          </MediaQuery>
           </div>
         </Header>
       }
