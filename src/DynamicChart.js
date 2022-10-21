@@ -13,7 +13,7 @@ export default function NDVIStatistics2({ndvi, prev,  name}){
         <ResponsiveContainer width="100%" height="90%">
           <BarChart width={300} height={40} data={data}>
             <XAxis dataKey="name" />
-            <YAxis />
+            <YAxis type="number" domain={['auto', 'auto']} />
             <Tooltip />
             <Legend />
             <Bar dataKey="ndvi" fill="#8884d8" />
