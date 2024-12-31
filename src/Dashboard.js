@@ -500,13 +500,13 @@ export default function Dashboard() {
         <LayersControl position='topright' >
             {basemap ? (
               <>
-      <LayersControl.BaseLayer checked={basemap} name='OSM'>
+      <LayersControl.BaseLayer name='OSM'>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url= "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
     />
     </LayersControl.BaseLayer>
-    <LayersControl.BaseLayer name='Satellite'>
+    <LayersControl.BaseLayer checked={basemap} name='Satellite'>
     <TileLayer
       attribution='&copy; Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
       url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
